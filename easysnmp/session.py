@@ -74,7 +74,6 @@ def validate_results(varlist):
         if variable.oid_index:
             varstr += ' with index {0}'.format(variable.oid_index)
 
-        print variable.snmp_type;
         if variable.snmp_type == 'NOSUCHOBJECT':
             raise EasySNMPNoSuchObjectError(
                 'no such object {0} could be found'.format(varstr)

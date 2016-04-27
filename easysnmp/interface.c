@@ -1987,6 +1987,8 @@ static PyObject *netsnmp_get(PyObject *self, PyObject *args) {
 
       if (notdone) {
         vars = op_data.response->variables;
+        op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
+
         while (vars) {
 
           if (vars->type == SNMP_ENDOFMIBVIEW) {
@@ -2002,7 +2004,6 @@ static PyObject *netsnmp_get(PyObject *self, PyObject *args) {
             __get_type_str(vars->type, val_type_str, 1);
             varbind = py_netsnmp_construct_varbind();
 
-            op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
             py_netsnmp_attr_set_string(varbind, "root_oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "snmp_type", val_type_str,
@@ -2026,7 +2027,6 @@ static PyObject *netsnmp_get(PyObject *self, PyObject *args) {
             break;
           }
 
-          op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
           varbind = read_variable(vars, &op_data, session_ctx->getlabel_flag, session_ctx->sprintval_flag);
 
           if (varbind) {
@@ -2181,6 +2181,8 @@ static PyObject *netsnmp_getnext(PyObject *self, PyObject *args) {
 
       if (notdone) {
         vars = op_data.response->variables;
+        op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
+
         while (vars) {
 
           if (vars->type == SNMP_ENDOFMIBVIEW) {
@@ -2196,7 +2198,6 @@ static PyObject *netsnmp_getnext(PyObject *self, PyObject *args) {
             __get_type_str(vars->type, val_type_str, 1);
             varbind = py_netsnmp_construct_varbind();
 
-            op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
             py_netsnmp_attr_set_string(varbind, "root_oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "snmp_type", val_type_str,
@@ -2220,7 +2221,6 @@ static PyObject *netsnmp_getnext(PyObject *self, PyObject *args) {
             break;
           }
 
-          op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
           varbind = read_variable(vars, &op_data, session_ctx->getlabel_flag, session_ctx->sprintval_flag);
 
           if (varbind) {
@@ -2375,6 +2375,8 @@ static PyObject *netsnmp_walk(PyObject *self, PyObject *args) {
 
       if (notdone) {
         vars = op_data.response->variables;
+        op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
+
         while (vars) {
 
           if (vars->type == SNMP_ENDOFMIBVIEW) {
@@ -2390,7 +2392,6 @@ static PyObject *netsnmp_walk(PyObject *self, PyObject *args) {
             __get_type_str(vars->type, val_type_str, 1);
             varbind = py_netsnmp_construct_varbind();
 
-            op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
             py_netsnmp_attr_set_string(varbind, "root_oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "snmp_type", val_type_str,
@@ -2414,7 +2415,6 @@ static PyObject *netsnmp_walk(PyObject *self, PyObject *args) {
             break;
           }
 
-          op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
           varbind = read_variable(vars, &op_data, session_ctx->getlabel_flag, session_ctx->sprintval_flag);
 
           if (varbind) {
@@ -2591,6 +2591,8 @@ static PyObject *netsnmp_getbulk(PyObject *self, PyObject *args) {
 
       if (notdone) {
         vars = op_data.response->variables;
+        op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
+
         while (vars) {
 
           if (vars->type == SNMP_ENDOFMIBVIEW) {
@@ -2606,7 +2608,6 @@ static PyObject *netsnmp_getbulk(PyObject *self, PyObject *args) {
             __get_type_str(vars->type, val_type_str, 1);
             varbind = py_netsnmp_construct_varbind();
 
-            op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
             py_netsnmp_attr_set_string(varbind, "root_oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "snmp_type", val_type_str,
@@ -2630,7 +2631,6 @@ static PyObject *netsnmp_getbulk(PyObject *self, PyObject *args) {
             break;
           }
 
-          op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
           varbind = read_variable(vars, &op_data, session_ctx->getlabel_flag, session_ctx->sprintval_flag);
 
           if (varbind) {
@@ -2798,6 +2798,8 @@ static PyObject *netsnmp_bulkwalk(PyObject *self, PyObject *args) {
 
       if (notdone) {
         vars = op_data.response->variables;
+        op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
+
         while (vars) {
 
           if (vars->type == SNMP_ENDOFMIBVIEW) {
@@ -2813,7 +2815,6 @@ static PyObject *netsnmp_bulkwalk(PyObject *self, PyObject *args) {
             __get_type_str(vars->type, val_type_str, 1);
             varbind = py_netsnmp_construct_varbind();
 
-            op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
             py_netsnmp_attr_set_string(varbind, "root_oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "oid", op_data.initial_oid, STRLEN(op_data.initial_oid));
             py_netsnmp_attr_set_string(varbind, "snmp_type", val_type_str,
@@ -2837,7 +2838,6 @@ static PyObject *netsnmp_bulkwalk(PyObject *self, PyObject *args) {
             break;
           }
 
-          op_data.initial_oid = op_data.initial_oid_str_arr[varlist_ind];
           varbind = read_variable(vars, &op_data, session_ctx->getlabel_flag, session_ctx->sprintval_flag);
 
           if (varbind) {

@@ -20,12 +20,12 @@ class SNMPVariable(object):
                       NOSUCHOBJECT and NOSUCHINSTANCE respectively
     """
     TYPE_CONVERSIONS = {
-        'INTEGER': long,
+        'INTEGER': int,
         'INTEGER32': int,
         'UNSIGNED32': int,
-        'COUNTER': long,
-        'GAUGE': long,
-        'COUNTER64': long,
+        'COUNTER': int,
+        'GAUGE': int,
+        'COUNTER64': int,
         'UINTEGER': int,
         'TICKS':int
     }
