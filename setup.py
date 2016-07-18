@@ -39,7 +39,24 @@ else:
     libdirs = [flag[2:] for flag in shlex.split(netsnmp_libs) if flag.startswith('-L')]  # noqa
     incdirs = []
 
+    if sys.platform == 'darwin':  # OS X
+        brew = os.popen('brew info net-snmp').read()
+        if 'command not found' not in brew and 'error' not in brew:
+            # /usr/local/opt is the default brew `opt` prefix, however the user
+            # may have installed it elsewhere
+            #
+            # The `brew info <pkg>` includes an apostrophe, which breaks shlex.
+            # We'll simply replace it
+            libdirs = [flag[2:] for flag in shlex.split(brew.replace('\'', '')) if flag.startswith('-L')]    # noqa
+            incdirs = [flag[2:] for flag in shlex.split(brew.replace('\'', '')) if flag.startswith('-I')]    # noqa
+            # The homebrew version also depends on the Openssl keg
+            brew = os.popen('brew info openssl').read()
+            libdirs += [flag[2:] for flag in shlex.split(brew.replace('\'', '')) if flag.startswith('-L')]    # noqa
+            incdirs += [flag[2:] for flag in shlex.split(brew.replace('\'', '')) if flag.startswith('-I')]    # noqa
+
 # Setup the py.test class for use with the test command
+
+
 class PyTest(TestCommand):
     user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
 
@@ -93,11 +110,11 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: System :: Networking',
         'Topic :: System :: Networking :: Monitoring'
     ]
